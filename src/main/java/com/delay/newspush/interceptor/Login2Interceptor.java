@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Component
-public class LoginInterceptor implements HandlerInterceptor {
+public class Login2Interceptor implements HandlerInterceptor {
 
     @Autowired
     UserService userService;
@@ -24,7 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("user2");
 //        if(user==null){
 //            user = userService.findById(1);
 //            session.setAttribute("user",user);
@@ -33,7 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
             return true;
         }
-        response.sendRedirect("/page/login");
+        response.sendRedirect("/page/clientLogin");
         return false;
     }
 }

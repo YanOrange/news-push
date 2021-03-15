@@ -62,11 +62,11 @@
                         </div>
                     </form>
                 </div>
-                <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="xadmin.open('新增','/page/add?status=3',800,600)" href="javascript:;">
-                        <i class="layui-icon iconfont">&#xe6b9;</i>新增管理员
-                    </button>
-                </div>
+                <#--<div class="layui-card-header">-->
+                    <#--<button class="layui-btn layui-btn-danger" onclick="xadmin.open('新增','/page/add?status=1',800,600)" href="javascript:;">-->
+                        <#--<i class="layui-icon iconfont">&#xe6b9;</i>新增主编-->
+                    <#--</button>-->
+                <#--</div>-->
                 <div class="layui-card-body ">
                     <table id="LAY_table_user" class="layui-table">
 
@@ -109,7 +109,7 @@
     function member_del(obj, id) {
         var arr = [];
         arr.push(id);
-        layer.confirm('确认要永久删除吗？', function (index) {
+        layer.confirm('确认要永久删除吗？删除后该主编的新闻将全部删除', function (index) {
             //发异步删除数据
             $.ajax({
                 url: '/user/delete',
@@ -166,75 +166,22 @@
                 });
     }
 
-    //通过
-    function pass(id) {
-        layer.confirm('确认通过嘛？', {
-            btn: ['确认', '取消'] //按钮
-        }, function () {
-            $.ajax({
-                url: '/essay/setState',
-                data: {
-                    essayId: id,
-                    state: 1
-                },
-                dataType: 'json',
-                success: function (res) {
-                    if (res.success) {
-                        layer.msg('审核通过，稿件已发布', {icon: 1});
-                        xadmin.father_reload();
-                    } else {
-                        layer.msg(res.msg, {icon: 2});
-                    }
-
-                }
-            })
-
-        }, function () {
-
-        });
-    }
-
-    function refuse(id) {
-        //prompt层
-        layer.prompt({title: '打回意见', formType: 2}, function (text, index) {
-            $.ajax({
-                url: '/essay/refuse',
-                data: {
-                    essayId: id,
-                    remark: text
-                },
-                type: 'post',
-                dataType: 'json',
-                success: function (res) {
-                    if (res.success) {
-                        layer.close(index);
-                        layer.msg('已打回<br>提交意见：' + text);
-                    } else {
-                        layer.close(index);
-                        layer.msglayer.msg(res.msg, {icon: 2});
-                    }
-                }
-            })
-
-        });
-    }
-
 </script>
 <script th:inline="none">
     /*数据查询*/
 
     $(function () {
-        getAllEssay();
+        getAllUser();
     })
 
-    /*获取全部文章*/
-    function getAllEssay() {
+    /*获取全部用户*/
+    function getAllUser() {
         layui.use('table',
                 function () {
                     var table = layui.table;
                     table.render({
                         id: "checkboxTable",
-                        url: '/user/findAllByStatus?status=3',
+                        url: '/user/findAllByStatus?status=0',
                         elem: '#LAY_table_user',
                         page: true,
                         cols: [[

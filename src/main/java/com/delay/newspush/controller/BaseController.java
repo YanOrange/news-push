@@ -1,5 +1,6 @@
 package com.delay.newspush.controller;
 
+import com.delay.newspush.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,5 +26,6 @@ public class BaseController {
         return user;
 
     }
+
 
 }

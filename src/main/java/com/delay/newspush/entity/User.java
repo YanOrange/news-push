@@ -7,47 +7,30 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * @author 闫金柱
- * @date 2021-2-28 18:37
- */
-@Data
 @Entity
+@Data
 @Table(name = "t_user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//自增长
     private Integer id;
 
-    private String userName;
-
-    private String passWord;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date createTime;
-
     private String name;
-
+    private String sex;
     private String age;
-
-    private String address;
-
+    private String penName;//笔名
+    private String birthDay;//生日
     private String phone;
-
     private String idCard;
+    private String account;
+    private String passWord;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "GMT-8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    private Date createTime;
+    private String email;
+    private String address;
+    private Integer status;//0普通用户 3管理员 1客户端用户
 
-    private Integer status;//0 未认证 1认证中  2已认证
-
-    private String school;//毕业院校
-
-    private String education;//学历
-
-    private String eduNo;//学位证编号
-
-    private Integer invalid;//失效用户 0否 1是
-
-    private Integer isTeacher;//1 是  0否
 
 }
