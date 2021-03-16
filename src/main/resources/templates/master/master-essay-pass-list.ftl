@@ -218,25 +218,13 @@
     function push(id) {
         //prompt层
         layer.prompt({title: '推送简介', formType: 2}, function (text, index) {
-            $.ajax({
-                url:'/essay/disuse',
-                data:{
-                    essayId:id,
-                    remark:text
-                },
-                type:'post',
-                dataType:'json',
-                success:function(res){
-                    if (res.success){
-                        layer.close(index);
-                        layer.msg('已弃用<br>原因：' + text);
-                    } else{
-                        layer.close(index);
-                        layer.msglayer.msg(res.msg, {icon: 2});
-                    }
-                }
-            })
-
+            var data = {
+                essayId:id,
+                text:text
+            }
+            send(JSON.stringify(data));
+            layer.close(index);
+            layer.msg('已推送');
         });
     }
 
@@ -319,9 +307,8 @@
     }
 
     //发送消息
-    function send() {
-        var message = document.getElementById('text').value;
-        websocket.send(message);
+    function send(data) {
+        websocket.send(data);
     }
 </script>
 
