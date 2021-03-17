@@ -31,6 +31,20 @@
             text-align: center;
             width: 49%;
         }
+        .push-nav{
+            width:95%;
+            margin:0 auto;
+            position: fixed;
+            height:1.3rem;
+            left:0;
+            right:0;
+            background: #fff;
+            box-shadow: 0 0px 12px rgb(0 0 0 / 25%);
+            top:0.2rem;
+            z-index: 999;
+            border-radius: 0.3rem;
+            border: 1px solid #f9f9f9;
+        }
     </style>
 </head>
 <body>
@@ -62,6 +76,16 @@
         </div>
     </div>
 </div>
+<div class="push-nav">
+    <a href="/page/findById?essayId=1">
+        <div class="push-title">
+            标题
+        </div>
+        <div class="push-description">
+            点击查看详情
+        </div>
+    </a>
+</div>
 </body>
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript">
@@ -83,8 +107,8 @@
                     var html = '';
                     $.each(data, function (index, arr) {
                         html += '<div>\n' +
-                                '        <span>'+ arr.user.penName +':</span><span>'+arr.content+'</span>\n' +
-                                '    </div>';
+                            '        <span>' + arr.user.penName + ':</span><span>' + arr.content + '</span>\n' +
+                            '    </div>';
                     })
                     $('.commentList').html(html);
                 } else {
@@ -116,7 +140,8 @@
     }
 
     function commit() {
-        var essayId = ${essay.id}
+        var essayId =
+        ${essay.id}
         var content = $('#comment').val()
         $.ajax({
             url: '/comment/commit',
@@ -137,5 +162,55 @@
     }
 
 
+</script>
+<script type="text/javascript">
+    var websocket = null;
+
+    //判断当前浏览器是否支持WebSocket, 主要此处要更换为自己的地址
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("ws://localhost:8084/websocket/oneToMany");
+    } else {
+        alert('Not support websocket')
+    }
+    //连接发生错误的回调方法
+    websocket.onerror = function () {
+        // setMessageInnerHTML("error");
+    };
+
+    //连接成功建立的回调方法
+    websocket.onopen = function (event) {
+        //setMessageInnerHTML("open");
+    }
+
+    //接收到消息的回调方法
+    websocket.onmessage = function (event) {
+        setMessageInnerHTML(event.data);
+    }
+
+    //连接关闭的回调方法
+    websocket.onclose = function () {
+        setMessageInnerHTML("close");
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function () {
+        websocket.close();
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+
+        document.getElementById('message').innerHTML += innerHTML + '<br/>';
+    }
+
+    //关闭连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+
+    //发送消息
+    function send(data) {
+        websocket.send(data);
+    }
 </script>
 </html>
