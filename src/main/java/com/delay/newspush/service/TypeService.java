@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Author 闫金柱
  * @create 2021-3-15 10:42
  */
-public interface TypeService extends JpaRepository<Type,Integer> {
+public interface TypeService extends JpaRepository<Type, Integer> {
     Type findByName(String name);
 }

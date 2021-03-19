@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
     <style>
-        body{
+        body {
             background: #fff;
         }
     </style>

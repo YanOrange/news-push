@@ -47,9 +47,9 @@
                 <div class="layui-input-inline">
                     <#if author.sex == '男'>
                         <input type="radio" name="sex" value="男" title="男" checked>
-                        <input type="radio" name="sex" value="女" title="女" >
+                        <input type="radio" name="sex" value="女" title="女">
                     <#elseif author.sex == '女'>
-                        <input type="radio" name="sex" value="男" title="男" >
+                        <input type="radio" name="sex" value="男" title="男">
                         <input type="radio" name="sex" value="女" title="女" checked>
                     </#if>
                 </div>
@@ -120,67 +120,67 @@
 </div>
 <script>
     layui.use(['form', 'layer'],
-            function () {
-                // $ = layui.jquery;
-                var form = layui.form,
-                        layer = layui.layer;
+        function () {
+            // $ = layui.jquery;
+            var form = layui.form,
+                layer = layui.layer;
 
-                //自定义验证规则
-                form.verify({});
+            //自定义验证规则
+            form.verify({});
 
-                //监听提交
-                form.on('submit(edit)',
-                        function (data) {
-                            console.log(data);
-                            //发异步，把数据提交给后端
-                            var s = JSON.stringify(data.field);
-                            console.log(s)
-                            $.ajax({
-                                url: '/user/editInfo',
-                                data: s,
-                                contentType: "application/json;charset=UTF-8",
-                                type: 'post',
-                                dataType: 'json',
-                                success: function (res) {
-                                    if (res.success) {
-                                        layer.alert('信息修改成功', {
-                                                    icon: 6
-                                                },
-                                                function () {
-                                                    //关闭当前frame
-                                                    xadmin.close();
+            //监听提交
+            form.on('submit(edit)',
+                function (data) {
+                    console.log(data);
+                    //发异步，把数据提交给后端
+                    var s = JSON.stringify(data.field);
+                    console.log(s)
+                    $.ajax({
+                        url: '/user/editInfo',
+                        data: s,
+                        contentType: "application/json;charset=UTF-8",
+                        type: 'post',
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.success) {
+                                layer.alert('信息修改成功', {
+                                        icon: 6
+                                    },
+                                    function () {
+                                        //关闭当前frame
+                                        xadmin.close();
 
-                                                    // 可以对父窗口进行刷新
-                                                    xadmin.father_reload();
-                                                });
-                                    } else {
-                                        layer.msg(res.msg, {icon: 2});
-                                    }
+                                        // 可以对父窗口进行刷新
+                                        xadmin.father_reload();
+                                    });
+                            } else {
+                                layer.msg(res.msg, {icon: 2});
+                            }
 
 
-                                }
-                            })
+                        }
+                    })
 
-                            return false;
-                        });
+                    return false;
+                });
 
-            });</script>
+        });</script>
 <script>
     layui.use('laydate',
-            function () {
-                var laydate = layui.laydate;
+        function () {
+            var laydate = layui.laydate;
 
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#start' //指定元素
-                });
-
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#end' //指定元素
-                });
-
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#start' //指定元素
             });
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#end' //指定元素
+            });
+
+        });
 </script>
 </body>
 

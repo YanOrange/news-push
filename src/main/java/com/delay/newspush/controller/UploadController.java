@@ -16,6 +16,7 @@ public class UploadController {
 
     /**
      * 上传图片
+     *
      * @param file
      * @return
      */
@@ -39,7 +40,7 @@ public class UploadController {
 
 //图片存放的路径，可写在本地硬盘，也可放在服务器上
 //----------------------------本实例在服务器镜像映射的地址----------------------------------------------
-                    String realPath = property+"/target/classes/static/uploadImg/";
+                    String realPath = property + "/target/classes/static/uploadImg/";
 
 //自定义的文件名称
                     trueFileName = String.valueOf(System.currentTimeMillis()) + fileName;

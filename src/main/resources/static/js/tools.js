@@ -26,7 +26,7 @@ if (!window.dsTools) {
         getUrlQuery: function getUrlQuery(url, name) {
             var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
             var urlArr = url.split('?');
-            if (urlArr.length>1) {
+            if (urlArr.length > 1) {
                 var matcher = pattern.exec('?' + urlArr[1]);
                 var items = null;
                 if (matcher) {

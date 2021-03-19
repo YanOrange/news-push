@@ -29,7 +29,7 @@ public class Login2Interceptor implements HandlerInterceptor {
 //            user = userService.findById(1);
 //            session.setAttribute("user",user);
 //        }
-        if(user!=null){
+        if (user != null) {
 
             return true;
         }

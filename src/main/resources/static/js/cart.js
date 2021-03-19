@@ -4,8 +4,8 @@
 (function () {
     $(function () {
         $('.additional-bar').on('click', function () {
-           var _this = $(this),
-               list = _this.siblings('.additional-list');
+            var _this = $(this),
+                list = _this.siblings('.additional-list');
             if (_this.hasClass('open')) {
                 _this.removeClass('open');
                 list.hide();
@@ -86,7 +86,7 @@
         });
 
         // 计算总计并设置底部bar值
-        function set_sum () {
+        function set_sum() {
             var sum = 0, // 总计
                 c_sum = 0, // 商品总计
                 a_sum = 0; // 配件总计

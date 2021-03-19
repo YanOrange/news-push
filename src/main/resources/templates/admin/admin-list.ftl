@@ -63,7 +63,8 @@
                     </form>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="xadmin.open('新增','/page/add?status=3',800,600)" href="javascript:;">
+                    <button class="layui-btn layui-btn-danger" onclick="xadmin.open('新增','/page/add?status=3',800,600)"
+                            href="javascript:;">
                         <i class="layui-icon iconfont">&#xe6b9;</i>新增管理员
                     </button>
                 </div>
@@ -81,20 +82,20 @@
 
 <script>
     layui.use('laydate',
-            function () {
-                var laydate = layui.laydate;
+        function () {
+            var laydate = layui.laydate;
 
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#start' //指定元素
-                });
-
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#end' //指定元素
-                });
-
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#start' //指定元素
             });
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#end' //指定元素
+            });
+
+        });
 </script>
 <script>
     layui.use('table', function () {
@@ -139,31 +140,31 @@
         });
 
         layer.confirm('确认要删除吗？' + ids.toString(),
-                function () {
-                    //捉到所有被选中的，发异步进行删除
-                    $.ajax({
-                        url: '/essay/delete',
-                        data: JSON.stringify(ids),
-                        dataType: 'json',
-                        type: 'post',
-                        contentType: 'application/json',
-                        success: function (res) {
-                            if (res.success) {
-                                layer.msg('删除成功', {
-                                    icon: 1
-                                });
-                                $(".layui-form-checked").not('.header').parents('tr').remove();
-                                xadmin.father_reload();
-                            } else {
-                                layer.msg(res.msg, {
-                                    icon: 2
-                                });
-                            }
+            function () {
+                //捉到所有被选中的，发异步进行删除
+                $.ajax({
+                    url: '/essay/delete',
+                    data: JSON.stringify(ids),
+                    dataType: 'json',
+                    type: 'post',
+                    contentType: 'application/json',
+                    success: function (res) {
+                        if (res.success) {
+                            layer.msg('删除成功', {
+                                icon: 1
+                            });
+                            $(".layui-form-checked").not('.header').parents('tr').remove();
+                            xadmin.father_reload();
+                        } else {
+                            layer.msg(res.msg, {
+                                icon: 2
+                            });
                         }
+                    }
 
-                    })
+                })
 
-                });
+            });
     }
 
     //通过
@@ -230,29 +231,29 @@
     /*获取全部文章*/
     function getAllEssay() {
         layui.use('table',
-                function () {
-                    var table = layui.table;
-                    table.render({
-                        id: "checkboxTable",
-                        url: '/user/findAllByStatus?status=3',
-                        elem: '#LAY_table_user',
-                        page: true,
-                        cols: [[
-                            {checkbox: true},
-                            {field: 'id', title: 'ID', width: 80},
-                            {field: 'name', title: '姓名', sort: true, width: 120},
-                            {field: 'sex', width: 80, title: '性别', sort: true},
-                            {field: 'age', width: 80, title: '年龄', sort: true},
-                            {field: 'phone', title: '联系方式', sort: true, width: 150},
-                            {field: 'idCard', title: '身份证', sort: true, width: 150},
-                            {field: 'address', title: '地址', sort: true, width: 150},
-                            {field: 'email', title: '电子邮箱', sort: true, width: 120},
-                            {toolbar: '#barTeacher', title: '操作', width: 120}
+            function () {
+                var table = layui.table;
+                table.render({
+                    id: "checkboxTable",
+                    url: '/user/findAllByStatus?status=3',
+                    elem: '#LAY_table_user',
+                    page: true,
+                    cols: [[
+                        {checkbox: true},
+                        {field: 'id', title: 'ID', width: 80},
+                        {field: 'name', title: '姓名', sort: true, width: 120},
+                        {field: 'sex', width: 80, title: '性别', sort: true},
+                        {field: 'age', width: 80, title: '年龄', sort: true},
+                        {field: 'phone', title: '联系方式', sort: true, width: 150},
+                        {field: 'idCard', title: '身份证', sort: true, width: 150},
+                        {field: 'address', title: '地址', sort: true, width: 150},
+                        {field: 'email', title: '电子邮箱', sort: true, width: 120},
+                        {toolbar: '#barTeacher', title: '操作', width: 120}
 
-                        ]]
-                    })
+                    ]]
+                })
 
-                });
+            });
     }
 
 

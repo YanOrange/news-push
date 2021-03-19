@@ -14,13 +14,13 @@ public class Essay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//自增长
     private Integer id;
 
-    @JoinColumn(name="user_id")//外键字段
+    @JoinColumn(name = "user_id")//外键字段
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;//作者
 
     private String title;//标题
     @Lob
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String content;//正文
     private Date createTime;
     private Date updateTime;

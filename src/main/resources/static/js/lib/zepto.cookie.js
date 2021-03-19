@@ -7,9 +7,9 @@
 // Dual licensed under the MIT and GPL licenses:
 // http://www.opensource.org/licenses/mit-license.php
 // http://www.gnu.org/licenses/gpl.html
-;(function($){
+;(function ($) {
     $.extend($, {
-        cookie : function (key, value, options) {
+        cookie: function (key, value, options) {
             var days, time, result, decode
 
             // A key and value were given. Set cookie.
@@ -41,7 +41,9 @@
             // Key and possibly options given, get cookie
             options = value || {}
 
-            decode = options.raw ? function (s) { return s } : decodeURIComponent
+            decode = options.raw ? function (s) {
+                return s
+            } : decodeURIComponent
 
             return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? decode(result[1]) : null
         }

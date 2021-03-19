@@ -17,7 +17,7 @@
         });
 
         // input 右侧清空按钮显示控制
-        $('.input-close input').on('keyup', function() {
+        $('.input-close input').on('keyup', function () {
             var _this = $(this);
             var val = _this.val();
             if (val) {
@@ -28,7 +28,7 @@
         });
 
         // input 右侧清空按钮事件
-        $('.input-close .icon-close-circle').on('click', function() {
+        $('.input-close .icon-close-circle').on('click', function () {
             var _this = $(this);
             _this.siblings('input').val('');
             _this.hide();
@@ -36,7 +36,7 @@
 
         // 获取验证码时手机号验证
         $('#getCode').on('click', function () {
-            var tel =  $('#tel').val();
+            var tel = $('#tel').val();
             isEmpty(tel, '请输入手机号码');
             if (!dsTools.isTel(tel)) {
                 $.dialog({
@@ -51,7 +51,7 @@
         // 提交时数据验证
         $('#submit').on('click', function () {
             var type = $('.nav-bar .active').index();
-            var tel =  $('#tel').val();
+            var tel = $('#tel').val();
 
             isEmpty(tel, '请输入手机号码');
 
@@ -75,7 +75,7 @@
         });
 
         // 字段是否为空判断
-        function isEmpty (val, msg) {
+        function isEmpty(val, msg) {
             if (!val) {
                 $.dialog({
                     type: 'tips',

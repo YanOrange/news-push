@@ -1,27 +1,27 @@
 /**
  * LArea移动端城市选择控件
- * 
+ *
  * version:1.7.2
- * 
+ *
  * author:黄磊
- * 
+ *
  * git:https://github.com/xfhxbb/LArea
- * 
+ *
  * Copyright 2016
- * 
+ *
  * Licensed under MIT
- * 
+ *
  * 最近修改于： 2016-6-12 16:47:41
  */
-window.LArea = (function() {
-    var MobileArea = function() {
+window.LArea = (function () {
+    var MobileArea = function () {
         this.gearArea;
         this.data;
         this.index = 0;
         this.value = [0, 0, 0];
     }
     MobileArea.prototype = {
-        init: function(params) {
+        init: function (params) {
             this.params = params;
             this.trigger = document.querySelector(params.trigger);
             if (params.valueTo) {
@@ -39,7 +39,7 @@ window.LArea = (function() {
             }
             this.bindEvent();
         },
-        getData: function(callback) {
+        getData: function (callback) {
             var _self = this;
             if (typeof _self.params.data == "object") {
                 _self.data = _self.params.data;
@@ -47,20 +47,22 @@ window.LArea = (function() {
             } else {
                 var xhr = new XMLHttpRequest();
                 xhr.open('get', _self.params.data);
-                xhr.onload = function(e) {
+                xhr.onload = function (e) {
                     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 0) {
                         var responseData = JSON.parse(xhr.responseText);
                         _self.data = responseData.data;
                         if (callback) {
                             callback()
-                        };
+                        }
+                        ;
                     }
                 }
                 xhr.send();
             }
         },
-        bindEvent: function() {
+        bindEvent: function () {
             var _self = this;
+
             //呼出插件
             function popupArea(e) {
                 _self.gearArea = document.createElement("div");
@@ -93,11 +95,11 @@ window.LArea = (function() {
                 document.body.appendChild(_self.gearArea);
                 areaCtrlInit();
                 var larea_cancel = _self.gearArea.querySelector(".larea_cancel");
-                larea_cancel.addEventListener('touchstart', function(e) {
+                larea_cancel.addEventListener('touchstart', function (e) {
                     _self.close(e);
                 });
                 var larea_finish = _self.gearArea.querySelector(".larea_finish");
-                larea_finish.addEventListener('touchstart', function(e) {
+                larea_finish.addEventListener('touchstart', function (e) {
                     _self.finish(e);
                 });
                 var area_province = _self.gearArea.querySelector(".area_province");
@@ -113,6 +115,7 @@ window.LArea = (function() {
                 area_city.addEventListener('touchend', gearTouchEnd);
                 area_county.addEventListener('touchend', gearTouchEnd);
             }
+
             //初始化插件默认值
             function areaCtrlInit() {
                 _self.gearArea.querySelector(".area_province").setAttribute("val", _self.value[0]);
@@ -128,6 +131,7 @@ window.LArea = (function() {
                         break;
                 }
             }
+
             //触摸开始
             function gearTouchStart(e) {
                 e.preventDefault();
@@ -150,6 +154,7 @@ window.LArea = (function() {
                 }
                 target.style.webkitTransitionDuration = target.style.transitionDuration = '0ms';
             }
+
             //手指移动
             function gearTouchMove(e) {
                 e.preventDefault();
@@ -169,8 +174,10 @@ window.LArea = (function() {
                 target.setAttribute('top', target["pos_" + target.id] + 'em');
                 if (e.targetTouches[0].screenY < 1) {
                     gearTouchEnd(e);
-                };
+                }
+                ;
             }
+
             //离开屏幕
             function gearTouchEnd(e) {
                 e.preventDefault();
@@ -197,6 +204,7 @@ window.LArea = (function() {
                 }
                 rollGear(target);
             }
+
             //缓动效果
             function rollGear(target) {
                 var d = 0;
@@ -206,12 +214,14 @@ window.LArea = (function() {
                     target.style.webkitTransitionDuration = target.style.transitionDuration = '200ms';
                     stopGear = true;
                 }
+
                 clearInterval(target["int_" + target.id]);
-                target["int_" + target.id] = setInterval(function() {
+                target["int_" + target.id] = setInterval(function () {
                     var pos = target["pos_" + target.id];
                     var speed = target["spd_" + target.id] * Math.exp(-0.03 * d);
                     pos += speed;
-                    if (Math.abs(speed) > 0.1) {} else {
+                    if (Math.abs(speed) > 0.1) {
+                    } else {
                         var b = Math.round(pos / 2) * 2;
                         pos = b;
                         setDuration();
@@ -236,6 +246,7 @@ window.LArea = (function() {
                     d++;
                 }, 30);
             }
+
             //控制插件滚动后停留的值
             function setGear(target, val) {
                 val = Math.round(val);
@@ -258,7 +269,8 @@ window.LArea = (function() {
                                         childData = nextData[i];
                                         break;
                                     }
-                                };
+                                }
+                                ;
                                 _self.index = 2;
                                 _self.setGearTooth(childData);
                                 break;
@@ -266,12 +278,13 @@ window.LArea = (function() {
                 }
 
             }
-            _self.getData(function() {
+
+            _self.getData(function () {
                 _self.trigger.addEventListener('click', popupArea);
             });
         },
         //重置节点个数
-        setGearTooth: function(data) {
+        setGearTooth: function (data) {
             var _self = this;
             var item = data || [];
             var l = item.length;
@@ -296,7 +309,8 @@ window.LArea = (function() {
                                 childData = nextData[i];
                                 break;
                             }
-                        };
+                        }
+                        ;
                         break;
                 }
                 var itemStr = "";
@@ -323,7 +337,7 @@ window.LArea = (function() {
                 _self.index = 0;
             }
         },
-        finish: function(e) {
+        finish: function (e) {
             var _self = this;
             var area_province = _self.gearArea.querySelector(".area_province");
             var area_city = _self.gearArea.querySelector(".area_city");
@@ -344,7 +358,7 @@ window.LArea = (function() {
             }
             _self.close(e);
         },
-        close: function(e) {
+        close: function (e) {
             e.preventDefault();
             var _self = this;
             var evt = new CustomEvent('input');

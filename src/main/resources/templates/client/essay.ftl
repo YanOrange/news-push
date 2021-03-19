@@ -31,30 +31,33 @@
             text-align: center;
             width: 49%;
         }
-        .push-nav{
-            width:95%;
-            margin:0 auto;
+
+        .push-nav {
+            width: 95%;
+            margin: 0 auto;
             position: fixed;
             /*height:1.3rem;*/
-            left:0;
-            right:0;
+            left: 0;
+            right: 0;
             background: #fff;
             box-shadow: 0 0px 12px rgb(0 0 0 / 25%);
-            top:0.2rem;
+            top: 0.2rem;
             z-index: 999;
             border-radius: 0.3rem;
             border: 1px solid #f9f9f9;
             padding: 0.35rem 0.3rem 0.2rem 0.3rem;
             box-sizing: border-box;
         }
-        .push-title{
+
+        .push-title {
             padding-bottom: 0.1rem;
             font-size: 0.34rem;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .push-description{
+
+        .push-description {
             padding-top: 0.1rem;
             color: #b3b3b3;
         }
@@ -205,22 +208,21 @@
     function setMessageInnerHTML(innerHTML) {
         var data = JSON.parse(innerHTML);
         var html = '';
-        html+='<div class="push-nav">\n' +
-                '    <a href="/page/findById?essayId='+data.essayId+'">\n' +
-                '        <div class="push-title">\n' +
-                '            '+data.text+'\n' +
-                '        </div>\n' +
-                '        <div class="push-description">\n' +
-                '            点击查看详情\n' +
-                '        </div>\n' +
-                '    </a>\n' +
-                '</div>';
+        html += '<div class="push-nav">\n' +
+            '    <a href="/page/findById?essayId=' + data.essayId + '">\n' +
+            '        <div class="push-title">\n' +
+            '            ' + data.text + '\n' +
+            '        </div>\n' +
+            '        <div class="push-description">\n' +
+            '            点击查看详情\n' +
+            '        </div>\n' +
+            '    </a>\n' +
+            '</div>';
         $('body').append(html);
         setTimeout(function () {
             $('.push-nav').remove();
-        },5000);
+        }, 5000);
     }
-
 
 
     //关闭连接

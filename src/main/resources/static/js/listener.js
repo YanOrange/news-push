@@ -33,7 +33,7 @@ if (!window.dsListener) {
             var brandName = $('#to_brand_list h3').text(); // 品牌名称
             var channelNo = '<?=$this->channel_no?>'; // 渠道号
             var userFinger = '<?=$this->user_id?>'; // 用户唯一标识
-            
+
             if (userFinger) {
                 postProductData(productId, topicId, productName, brandName, channelNo, userFinger)
             } else {
@@ -80,6 +80,7 @@ if (!window.dsListener) {
         })
 
     }
+
     // 商品详情页浏览信息入库
     function postProductData(productId, topicId, productName, brandName, channelNo, userFinger) {
         $.ajax({
@@ -96,6 +97,7 @@ if (!window.dsListener) {
         })
 
     }
+
     // 模块被点击次数信息入库
     function postTapData(elName, elId, userFinger, channelNo) {
         $.ajax({

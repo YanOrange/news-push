@@ -15,15 +15,15 @@ import java.util.List;
 
 @Controller
 @RequestMapping("comment")
-public class CommentController extends BaseController{
+public class CommentController extends BaseController {
 
     @Autowired
     CommentService commentService;
 
     @RequestMapping("commit")
     @ResponseBody
-    public ExecuteResult commit(String content, Integer essayId){
-        User user2 = (User)getSession().getAttribute("user");
+    public ExecuteResult commit(String content, Integer essayId) {
+        User user2 = (User) getSession().getAttribute("user");
         Comment comment = new Comment();
         comment.setContent(content);
         comment.setCreateTime(new Date());
@@ -37,7 +37,7 @@ public class CommentController extends BaseController{
 
     @RequestMapping("findByEssayId")
     @ResponseBody
-    public ExecuteResult findByEssayId(Integer essayId){
+    public ExecuteResult findByEssayId(Integer essayId) {
 
 
         List<Comment> list = commentService.findByEssayId(essayId);

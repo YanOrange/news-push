@@ -10,9 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 
  * 前后端交互的类实现消息的接收推送(自己发送给所有人(不包括自己))
- * 
+ *
  * @ServerEndpoint(value = "/websocket/oneToMany") 前端通过此URI 和后端交互，建立连接
  */
 @Slf4j
@@ -20,10 +19,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class OneToManyWebSocket {
 
-    /** 记录当前在线连接数 */
+    /**
+     * 记录当前在线连接数
+     */
     private static AtomicInteger onlineCount = new AtomicInteger(0);
 
-    /** 存放所有在线的客户端 */
+    /**
+     * 存放所有在线的客户端
+     */
     private static Map<String, Session> clients = new ConcurrentHashMap<>();
 
     /**
@@ -49,8 +52,7 @@ public class OneToManyWebSocket {
     /**
      * 收到客户端消息后调用的方法
      *
-     * @param message
-     *            客户端发送过来的消息
+     * @param message 客户端发送过来的消息
      */
     @OnMessage
     public void onMessage(String message, Session session) {
@@ -66,9 +68,8 @@ public class OneToManyWebSocket {
 
     /**
      * 群发消息
-     * 
-     * @param message
-     *            消息内容
+     *
+     * @param message 消息内容
      */
     private void sendMessage(String message, Session fromSession) {
         for (Map.Entry<String, Session> sessionEntry : clients.entrySet()) {

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
     <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css" />
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css"/>
     <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
@@ -20,7 +20,7 @@
     <script src="/js/respond.min.js"></script>
     <![endif]-->
     <style>
-        .title{
+        .title {
             padding: 10px;
             width: 100%;
             margin-bottom: 20px;
@@ -35,22 +35,23 @@
         </fieldset>
 
         <#--<form class="layui-form" action="">-->
-            <div class="wrapper">
-                <input type="hidden" name="id" value="<#if essay??>${essay.id!''}</#if>" id="id">
-                <input type="hidden" name="typeId" value="${(essay.type.id)!''}" id="typeId">
-                <label for="title">新闻标题</label>
-                <input type="text" class="title" id="title" name="title" value="<#if essay??>${essay.title!''}</#if>"/>
-                <label for="title">新闻类型</label>
-                <select id="type" class="title">
-                    <option value="">请选择新闻类型...</option>
-                </select>
-                <label for="content">正文</label>
-                <textarea cols="30" rows="10" id="content" class="content" name="content" data-provide='tinymce'><#if essay??>${essay.content!''}</#if></textarea>
-                <#--<pre><code class="json"></code></pre>-->
-                <button class="layui-btn" onclick="submit();" href="javascript:;" type="button">
-                    发布，提交审核
-                </button>
-            </div>
+        <div class="wrapper">
+            <input type="hidden" name="id" value="<#if essay??>${essay.id!''}</#if>" id="id">
+            <input type="hidden" name="typeId" value="${(essay.type.id)!''}" id="typeId">
+            <label for="title">新闻标题</label>
+            <input type="text" class="title" id="title" name="title" value="<#if essay??>${essay.title!''}</#if>"/>
+            <label for="title">新闻类型</label>
+            <select id="type" class="title">
+                <option value="">请选择新闻类型...</option>
+            </select>
+            <label for="content">正文</label>
+            <textarea cols="30" rows="10" id="content" class="content" name="content"
+                      data-provide='tinymce'><#if essay??>${essay.content!''}</#if></textarea>
+            <#--<pre><code class="json"></code></pre>-->
+            <button class="layui-btn" onclick="submit();" href="javascript:;" type="button">
+                发布，提交审核
+            </button>
+        </div>
         <#--</form>-->
     </div>
 </div>
@@ -81,22 +82,22 @@
     })
 
     //初始化类型
-    function initType(){
+    function initType() {
         var typeId = $('#typeId').val();
 
         $.ajax({
-            url:'/type/getAll',
-            type:'post',
+            url: '/type/getAll',
+            type: 'post',
             contentType: "application/json;charset=UTF-8",
-            success:function (res) {
-                if (res.success){
+            success: function (res) {
+                if (res.success) {
                     var list = res.data;
                     var html = '<option value="">请选择新闻类型...</option>';
                     $.each(list, function (index, data) {
-                        if (typeId&&typeId==data.id){
-                            html+='<option value="'+data.id+'" selected>'+data.name+'</option>';
+                        if (typeId && typeId == data.id) {
+                            html += '<option value="' + data.id + '" selected>' + data.name + '</option>';
                         } else {
-                            html+='<option value="'+data.id+'">'+data.name+'</option>';
+                            html += '<option value="' + data.id + '">' + data.name + '</option>';
                         }
                     })
                     $('#type').html(html);
@@ -111,27 +112,26 @@
         var typeId = jQuery('#type').val();
         var content = tinymce.activeEditor.getContent();
         var data = {
-            id:id,
-            title:title,
-            type:{
-                id:typeId
+            id: id,
+            title: title,
+            type: {
+                id: typeId
             },
-            content:content
+            content: content
         };
-        if (!(title && typeId && content)){
+        if (!(title && typeId && content)) {
             layer.msg('请完善新闻参数')
         }
         console.log(data);
         jQuery.ajax({
-            url:'/essay/save',
-            data:JSON.stringify(data),
-            dataType:'json',
-            type:'post',
+            url: '/essay/save',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            type: 'post',
             contentType: "application/json;charset=UTF-8",
-            success:function (res) {
-                if (res.success){
-                    layer.msg('上传成功！', {
-                    }, function(){
+            success: function (res) {
+                if (res.success) {
+                    layer.msg('上传成功！', {}, function () {
                         location.reload();
                     });
                 }

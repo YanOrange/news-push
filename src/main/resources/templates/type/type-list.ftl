@@ -19,9 +19,9 @@
     <![endif]-->
     <style>
         .iconfont {
-            font-family:"iconfont" !important;
-            font-size:16px;
-            font-style:normal;
+            font-family: "iconfont" !important;
+            font-size: 16px;
+            font-style: normal;
             -webkit-font-smoothing: antialiased;
             -webkit-text-stroke-width: 0.2px;
             -moz-osx-font-smoothing: grayscale;
@@ -63,11 +63,14 @@
                     </form>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="xadmin.open('新增','/page/addType',800,600)" href="javascript:;">
+                    <button class="layui-btn layui-btn-danger" onclick="xadmin.open('新增','/page/addType',800,600)"
+                            href="javascript:;">
                         <i class="layui-icon iconfont">&#xe6b9;</i>新增类型
                     </button>
                     <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                        <i class="layui-icon"></i>批量删除</button></div>
+                        <i class="layui-icon"></i>批量删除
+                    </button>
+                </div>
                 <div class="layui-card-body ">
                     <table id="LAY_table_user" class="layui-table">
 
@@ -82,26 +85,26 @@
 
 <script>
     layui.use('laydate',
-            function () {
-                var laydate = layui.laydate;
+        function () {
+            var laydate = layui.laydate;
 
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#start' //指定元素
-                });
-
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#end' //指定元素
-                });
-
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#start' //指定元素
             });
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#end' //指定元素
+            });
+
+        });
 </script>
 <script>
-    layui.use('table',function () {
-                var table = layui.table;
+    layui.use('table', function () {
+        var table = layui.table;
 
-            });
+    });
 </script>
 <script>
     /*操作数据*/
@@ -139,31 +142,31 @@
         });
 
         layer.confirm('确认要删除吗？' + ids.toString(),
-                function () {
-                    //捉到所有被选中的，发异步进行删除
-                    $.ajax({
-                        url:'/type/delete',
-                        data:JSON.stringify(ids),
-                        dataType:'json',
-                        type:'post',
-                        contentType:'application/json',
-                        success:function (res) {
-                            if (res.success){
-                                layer.msg('删除成功', {
-                                    icon: 1
-                                });
-                                $(".layui-form-checked").not('.header').parents('tr').remove();
-                                xadmin.father_reload();
-                            } else{
-                                layer.msg(res.msg,{
-                                    icon: 2
-                                });
-                            }
+            function () {
+                //捉到所有被选中的，发异步进行删除
+                $.ajax({
+                    url: '/type/delete',
+                    data: JSON.stringify(ids),
+                    dataType: 'json',
+                    type: 'post',
+                    contentType: 'application/json',
+                    success: function (res) {
+                        if (res.success) {
+                            layer.msg('删除成功', {
+                                icon: 1
+                            });
+                            $(".layui-form-checked").not('.header').parents('tr').remove();
+                            xadmin.father_reload();
+                        } else {
+                            layer.msg(res.msg, {
+                                icon: 2
+                            });
                         }
+                    }
 
-                    })
+                })
 
-                });
+            });
     }
 
 </script>
@@ -177,25 +180,24 @@
     /*获取全部文章*/
     function getAllEssay() {
         layui.use('table',
-                function () {
-                    var table = layui.table;
-                    table.render({
-                        id: "checkboxTable",
-                        url: '/type/getAll',
-                        elem: '#LAY_table_user',
-                        page:true,
-                        cols: [[
-                            {checkbox: true},
-                            {field: 'id', title: 'ID', width: 80},
-                            {field: 'name', title: '类型名', sort: true, width: 120},
-                            {field: 'createTime', title: '创建时间', sort: true, width: 150},
-                            {toolbar:'#barTeacher',title:'操作',width: 120}
-                        ]]
-                    })
+            function () {
+                var table = layui.table;
+                table.render({
+                    id: "checkboxTable",
+                    url: '/type/getAll',
+                    elem: '#LAY_table_user',
+                    page: true,
+                    cols: [[
+                        {checkbox: true},
+                        {field: 'id', title: 'ID', width: 80},
+                        {field: 'name', title: '类型名', sort: true, width: 120},
+                        {field: 'createTime', title: '创建时间', sort: true, width: 150},
+                        {toolbar: '#barTeacher', title: '操作', width: 120}
+                    ]]
+                })
 
-                });
+            });
     }
-
 
 
     /**
@@ -206,14 +208,14 @@
     function isNullFormat(o) {
         if (o) {
             return o;
-        }else{
+        } else {
             return '暂无';
         }
     }
 
 </script>
 <script type="text/html" id="barTeacher">
-    <a title="编辑"  onclick="xadmin.open('编辑','/type/toEditType?typeId={{d.id}}',800,600)" href="javascript:;">
+    <a title="编辑" onclick="xadmin.open('编辑','/type/toEditType?typeId={{d.id}}',800,600)" href="javascript:;">
         <i class="layui-icon">&#xe642;</i>
     </a>
     <a title="移除" onclick="member_del(this,{{d.id}})" href="javascript:;">

@@ -1,20 +1,20 @@
 /**
  * LCalendar移动端日期时间选择控件
- * 
+ *
  * version:1.7.1
- * 
+ *
  * author:黄磊
- * 
+ *
  * git:https://github.com/xfhxbb/LCalendar
- * 
+ *
  * Copyright 2016
- * 
+ *
  * Licensed under MIT
- * 
+ *
  * 最近修改于： 2016-6-12 17:22:20
  */
-window.LCalendar = (function() {
-    var MobileCalendar = function() {
+window.LCalendar = (function () {
+    var MobileCalendar = function () {
         this.gearDate;
         this.minY = 1900;
         this.minM = 1;
@@ -24,7 +24,7 @@ window.LCalendar = (function() {
         this.maxD = 31;
     }
     MobileCalendar.prototype = {
-        init: function(params) {
+        init: function (params) {
             this.type = params.type;
             this.trigger = document.querySelector(params.trigger);
             if (this.trigger.getAttribute("data-lcalendar") != null) {
@@ -52,8 +52,9 @@ window.LCalendar = (function() {
             }
             this.bindEvent(this.type);
         },
-        bindEvent: function(type) {
+        bindEvent: function (type) {
             var _self = this;
+
             //呼出日期插件
             function popupDate(e) {
                 _self.gearDate = document.createElement("div");
@@ -105,6 +106,7 @@ window.LCalendar = (function() {
                 date_mm.addEventListener('touchend', gearTouchEnd);
                 date_dd.addEventListener('touchend', gearTouchEnd);
             }
+
             //初始化年月日插件默认值
             function dateCtrlInit() {
                 var date = new Date();
@@ -126,6 +128,7 @@ window.LCalendar = (function() {
                 _self.gearDate.querySelector(".date_dd").setAttribute("val", dateArr.dd);
                 setDateGearTooth();
             }
+
             //呼出年月插件
             function popupYM(e) {
                 _self.gearDate = document.createElement("div");
@@ -167,6 +170,7 @@ window.LCalendar = (function() {
                 date_yy.addEventListener('touchend', gearTouchEnd);
                 date_mm.addEventListener('touchend', gearTouchEnd);
             }
+
             //初始化年月插件默认值
             function ymCtrlInit() {
                 var date = new Date();
@@ -185,6 +189,7 @@ window.LCalendar = (function() {
                 _self.gearDate.querySelector(".date_mm").setAttribute("val", dateArr.mm);
                 setDateGearTooth();
             }
+
             //呼出日期+时间插件
             function popupDateTime(e) {
                 _self.gearDate = document.createElement("div");
@@ -256,6 +261,7 @@ window.LCalendar = (function() {
                 time_hh.addEventListener('touchend', gearTouchEnd);
                 time_mm.addEventListener('touchend', gearTouchEnd);
             }
+
             //初始化年月日时分插件默认值
             function dateTimeCtrlInit() {
                 var date = new Date();
@@ -284,6 +290,7 @@ window.LCalendar = (function() {
                 _self.gearDate.querySelector(".time_mm").setAttribute("val", dateArr.mi);
                 setTimeGearTooth();
             }
+
             //呼出时间插件
             function popupTime(e) {
                 _self.gearDate = document.createElement("div");
@@ -325,6 +332,7 @@ window.LCalendar = (function() {
                 time_hh.addEventListener('touchend', gearTouchEnd);
                 time_mm.addEventListener('touchend', gearTouchEnd);
             }
+
             //初始化时分插件默认值
             function timeCtrlInit() {
                 var d = new Date();
@@ -341,6 +349,7 @@ window.LCalendar = (function() {
                 _self.gearDate.querySelector(".time_mm").setAttribute("val", e.mm);
                 setTimeGearTooth();
             }
+
             //重置日期节点个数
             function setDateGearTooth() {
                 var passY = _self.maxY - _self.minY + 1;
@@ -438,6 +447,7 @@ window.LCalendar = (function() {
                     return;
                 }
             }
+
             //重置时间节点个数
             function setTimeGearTooth() {
                 var time_hh = _self.gearDate.querySelector(".time_hh");
@@ -467,6 +477,7 @@ window.LCalendar = (function() {
                     return
                 }
             }
+
             //求月份最大天数
             function calcDays(year, month) {
                 if (month == 1) {
@@ -484,6 +495,7 @@ window.LCalendar = (function() {
                     }
                 }
             }
+
             //触摸开始
             function gearTouchStart(e) {
                 e.preventDefault();
@@ -506,6 +518,7 @@ window.LCalendar = (function() {
                 }
                 target.style.webkitTransitionDuration = target.style.transitionDuration = '0ms';
             }
+
             //手指移动
             function gearTouchMove(e) {
                 e.preventDefault();
@@ -525,8 +538,10 @@ window.LCalendar = (function() {
                 target.setAttribute('top', target["pos_" + target.id] + 'em');
                 if (e.targetTouches[0].screenY < 1) {
                     gearTouchEnd(e);
-                };
+                }
+                ;
             }
+
             //离开屏幕
             function gearTouchEnd(e) {
                 e.preventDefault();
@@ -553,6 +568,7 @@ window.LCalendar = (function() {
                 }
                 rollGear(target);
             }
+
             //缓动效果
             function rollGear(target) {
                 var d = 0;
@@ -562,13 +578,15 @@ window.LCalendar = (function() {
                     target.style.webkitTransitionDuration = target.style.transitionDuration = '200ms';
                     stopGear = true;
                 }
+
                 var passY = _self.maxY - _self.minY + 1;
                 clearInterval(target["int_" + target.id]);
-                target["int_" + target.id] = setInterval(function() {
+                target["int_" + target.id] = setInterval(function () {
                     var pos = target["pos_" + target.id];
                     var speed = target["spd_" + target.id] * Math.exp(-0.03 * d);
                     pos += speed;
-                    if (Math.abs(speed) > 0.1) {} else {
+                    if (Math.abs(speed) > 0.1) {
+                    } else {
                         var b = Math.round(pos / 2) * 2;
                         pos = b;
                         setDuration();
@@ -675,6 +693,7 @@ window.LCalendar = (function() {
                     d++;
                 }, 30);
             }
+
             //控制插件滚动后停留的值
             function setGear(target, val) {
                 val = Math.round(val);
@@ -685,6 +704,7 @@ window.LCalendar = (function() {
                     setTimeGearTooth();
                 }
             }
+
             //取消
             function closeMobileCalendar(e) {
                 e.preventDefault();
@@ -698,7 +718,7 @@ window.LCalendar = (function() {
                 }
                 _self.trigger.dispatchEvent(evt);
                 document.body.removeChild(_self.gearDate);
-                _self.gearDate=null;
+                _self.gearDate = null;
             }
 
             //日期确认
@@ -712,6 +732,7 @@ window.LCalendar = (function() {
                 _self.trigger.value = (date_yy % passY + _self.minY) + "-" + date_mm + "-" + date_dd;
                 closeMobileCalendar(e);
             }
+
             //年月确认
             function finishMobileYM(e) {
                 var passY = _self.maxY - _self.minY + 1;
@@ -721,6 +742,7 @@ window.LCalendar = (function() {
                 _self.trigger.value = (date_yy % passY + _self.minY) + "-" + date_mm;
                 closeMobileCalendar(e);
             }
+
             //日期时间确认
             function finishMobileDateTime(e) {
                 var passY = _self.maxY - _self.minY + 1;
@@ -736,6 +758,7 @@ window.LCalendar = (function() {
                 _self.trigger.value = (date_yy % passY + _self.minY) + "-" + date_mm + "-" + date_dd + " " + (time_hh.length < 2 ? "0" : "") + time_hh + (time_mm.length < 2 ? ":0" : ":") + time_mm;
                 closeMobileCalendar(e);
             }
+
             //时间确认
             function finishMobileTime(e) {
                 var time_hh = parseInt(Math.round(_self.gearDate.querySelector(".time_hh").getAttribute("val")));
@@ -745,6 +768,7 @@ window.LCalendar = (function() {
                 _self.trigger.value = (time_hh.length < 2 ? "0" : "") + time_hh + (time_mm.length < 2 ? ":0" : ":") + time_mm;
                 closeMobileCalendar(e);
             }
+
             _self.trigger.addEventListener('click', {
                 "ym": popupYM,
                 "date": popupDate,

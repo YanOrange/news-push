@@ -11,10 +11,10 @@ if (!window.ds) {
             var copy_obj = document.getElementById(id);
             var val = copy_obj.value;
             var len = val.length;
-            
+
             // 兼容苹果，选中文字
             ds.select_text(copy_obj, 0, len);
-    
+
             if (document.execCommand('copy', false, null)) {
                 document.execCommand('copy', false, null); // 执行复制命令
                 $.dialog({

@@ -96,7 +96,10 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn" onclick="xadmin.open('编辑','/user/getInfo?authorId='+${user.id},800,600)" href="javascript:;">立即修改</button>
+                    <button type="button" class="layui-btn"
+                            onclick="xadmin.open('编辑','/user/getInfo?authorId='+${user.id},800,600)"
+                            href="javascript:;">立即修改
+                    </button>
                 </div>
             </div>
         </form>

@@ -5,9 +5,9 @@ var curCount; //当前剩余秒数
 function sendMessage(status, propmstatus) {
     if (status == 2) {
         if (propmstatus == "1") {
-            $.MsgBox.Alert("图形验证码错误", '', '', function() {
+            $.MsgBox.Alert("图形验证码错误", '', '', function () {
                 $.MsgBox.Prompt('图形验证码', '', '', '请输入验证码', '<img id="vCode" src="getRandomVCode.jhtm?now=' + new Date() + '" width="80" alt="验证码" style="display:inline;margin-top:-4px;" onclick="updateCode()">',
-                    function(e) {
+                    function (e) {
                         if (e.index == 1) {
                             var tel = $("#telphone").val();
                             sendCode(tel, e.value);
@@ -19,7 +19,7 @@ function sendMessage(status, propmstatus) {
             return;
         } else {
             $.MsgBox.Prompt('图形验证码', '', '', '请输入验证码', '<img id="vCode" src="getRandomVCode.jhtm?now=' + new Date() + '" width="80" alt="验证码" style="display:inline;margin-top:-4px;" onclick="updateCode()">',
-                function(e) {
+                function (e) {
                     if (e.index == 1) {
                         var tel = $("#telphone").val();
                         sendCode(tel, e.value);
@@ -45,11 +45,11 @@ function sendCode(tel, vCode) {
             telphone: tel,
             vCode: vCode
         },
-        success: function(data) {
+        success: function (data) {
             if (data.resultCode == "SUCCESS") {
                 sendMessage(data.status, 0);
                 if (data.status == 1) {
-                    $.MsgBox.Alert('已发送', '', '', function() {
+                    $.MsgBox.Alert('已发送', '', '', function () {
                         $("#dCode").focus();
                     });
                 }

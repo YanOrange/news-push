@@ -19,9 +19,9 @@
     <![endif]-->
     <style>
         .iconfont {
-            font-family:"iconfont" !important;
-            font-size:16px;
-            font-style:normal;
+            font-family: "iconfont" !important;
+            font-size: 16px;
+            font-style: normal;
             -webkit-font-smoothing: antialiased;
             -webkit-text-stroke-width: 0.2px;
             -moz-osx-font-smoothing: grayscale;
@@ -64,7 +64,9 @@
                 </div>
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                        <i class="layui-icon"></i>批量删除</button></div>
+                        <i class="layui-icon"></i>批量删除
+                    </button>
+                </div>
                 <div class="layui-card-body ">
                     <table id="LAY_table_user" class="layui-table">
 
@@ -79,26 +81,26 @@
 
 <script>
     layui.use('laydate',
-            function () {
-                var laydate = layui.laydate;
+        function () {
+            var laydate = layui.laydate;
 
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#start' //指定元素
-                });
-
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#end' //指定元素
-                });
-
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#start' //指定元素
             });
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#end' //指定元素
+            });
+
+        });
 </script>
 <script>
-    layui.use('table',function () {
-                var table = layui.table;
+    layui.use('table', function () {
+        var table = layui.table;
 
-            });
+    });
 </script>
 <script>
     /*操作数据*/
@@ -110,22 +112,23 @@
         layer.confirm('确认要删除吗？', function (index) {
             //发异步删除数据
             $.ajax({
-                url:'/essay/delete',
-                data:JSON.stringify(arr),
-                type:'post',
-                dataType:'json',
+                url: '/essay/delete',
+                data: JSON.stringify(arr),
+                type: 'post',
+                dataType: 'json',
                 contentType: "application/json",
-                success:function (res) {
-                    if (res.success){
+                success: function (res) {
+                    if (res.success) {
                         $(obj).parents("tr").remove();
-                        layer.msg('已删除!',{icon:1,time:1000});
-                    } else{
-                        layer.msg(res.msg,{icon:2,time:1000});
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                    } else {
+                        layer.msg(res.msg, {icon: 2, time: 1000});
                     }
                 }
             })
         });
     }
+
     /*用户-删除全部*/
     function delAll(argument) {
         var checkStatus = layui.table.checkStatus('checkboxTable').data;
@@ -136,47 +139,47 @@
         });
 
         layer.confirm('确认要删除吗？' + ids.toString(),
-                function () {
-                    //捉到所有被选中的，发异步进行删除
-                    $.ajax({
-                        url:'/essay/delete',
-                        data:JSON.stringify(ids),
-                        dataType:'json',
-                        type:'post',
-                        contentType:'application/json',
-                        success:function (res) {
-                            if (res.success){
-                                layer.msg('删除成功', {
-                                    icon: 1
-                                });
-                                $(".layui-form-checked").not('.header').parents('tr').remove();
-                                xadmin.father_reload();
-                            } else{
-                                layer.msg(res.msg,{
-                                    icon: 2
-                                });
-                            }
+            function () {
+                //捉到所有被选中的，发异步进行删除
+                $.ajax({
+                    url: '/essay/delete',
+                    data: JSON.stringify(ids),
+                    dataType: 'json',
+                    type: 'post',
+                    contentType: 'application/json',
+                    success: function (res) {
+                        if (res.success) {
+                            layer.msg('删除成功', {
+                                icon: 1
+                            });
+                            $(".layui-form-checked").not('.header').parents('tr').remove();
+                            xadmin.father_reload();
+                        } else {
+                            layer.msg(res.msg, {
+                                icon: 2
+                            });
                         }
+                    }
 
-                    })
+                })
 
-                });
+            });
     }
 
     //通过
-    function pass(id){
+    function pass(id) {
         layer.confirm('确认通过嘛？', {
-            btn: ['确认','取消'] //按钮
-        }, function(){
+            btn: ['确认', '取消'] //按钮
+        }, function () {
             $.ajax({
-                url:'/essay/setState',
-                data:{
-                    essayId:id,
-                    state:1
+                url: '/essay/setState',
+                data: {
+                    essayId: id,
+                    state: 1
                 },
-                dataType:'json',
-                success:function (res) {
-                    if (res.success){
+                dataType: 'json',
+                success: function (res) {
+                    if (res.success) {
                         layer.msg('审核通过，稿件已发布', {icon: 1});
                         xadmin.father_reload();
                     } else {
@@ -186,26 +189,27 @@
                 }
             })
 
-        }, function(){
+        }, function () {
 
         });
     }
+
     function refuse(id) {
         //prompt层
         layer.prompt({title: '打回意见', formType: 2}, function (text, index) {
             $.ajax({
-                url:'/essay/refuse',
-                data:{
-                    essayId:id,
-                    remark:text
+                url: '/essay/refuse',
+                data: {
+                    essayId: id,
+                    remark: text
                 },
-                type:'post',
-                dataType:'json',
-                success:function(res){
-                    if (res.success){
+                type: 'post',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.success) {
                         layer.close(index);
                         layer.msg('已打回<br>提交意见：' + text);
-                    } else{
+                    } else {
                         layer.close(index);
                         layer.msglayer.msg(res.msg, {icon: 2});
                     }
@@ -226,31 +230,36 @@
     /*获取全部文章*/
     function getAllEssay() {
         layui.use('table',
-                function () {
-                    var table = layui.table;
-                    table.render({
-                        id: "checkboxTable",
-                        url: '/essay/getEssayByState?state=0',
-                        elem: '#LAY_table_user',
-                        page:true,
-                        cols: [[
-                            {checkbox: true},
-                            {field: 'id', title: 'ID', width: 80},
-                            {field: 'title', title: '标题', sort: true, width: 120},
-                            {field: 'type',width:80, title: '类型', sort: true,templet:'<div>{{d.type.name}}</div>'},
-                            {field: 'user',width:80, title: '作者', sort: true,templet:'<div>{{d.user.penName}}</div>'},
-                            {field: 'createTime', title: '创建时间', sort: true, width: 150},
-                            {field: 'updateTime', title: '最后一次更新时间', sort: true, width: 150},
-                            {field: 'publishTime', title: '发布时间', sort: true, width: 150},
-                            {field: 'state', title: '状态', sort: true, width: 120,templet:'<div>{{d.state==0?"审核中":(d.state==1?"发布":(d.state==2?"打回":(d.state==3?"弃用":"未知")))}}</div>'},
-                            {toolbar:'#barTeacher',title:'操作',width: 120}
+            function () {
+                var table = layui.table;
+                table.render({
+                    id: "checkboxTable",
+                    url: '/essay/getEssayByState?state=0',
+                    elem: '#LAY_table_user',
+                    page: true,
+                    cols: [[
+                        {checkbox: true},
+                        {field: 'id', title: 'ID', width: 80},
+                        {field: 'title', title: '标题', sort: true, width: 120},
+                        {field: 'type', width: 80, title: '类型', sort: true, templet: '<div>{{d.type.name}}</div>'},
+                        {field: 'user', width: 80, title: '作者', sort: true, templet: '<div>{{d.user.penName}}</div>'},
+                        {field: 'createTime', title: '创建时间', sort: true, width: 150},
+                        {field: 'updateTime', title: '最后一次更新时间', sort: true, width: 150},
+                        {field: 'publishTime', title: '发布时间', sort: true, width: 150},
+                        {
+                            field: 'state',
+                            title: '状态',
+                            sort: true,
+                            width: 120,
+                            templet: '<div>{{d.state==0?"审核中":(d.state==1?"发布":(d.state==2?"打回":(d.state==3?"弃用":"未知")))}}</div>'
+                        },
+                        {toolbar: '#barTeacher', title: '操作', width: 120}
 
-                        ]]
-                    })
+                    ]]
+                })
 
-                });
+            });
     }
-
 
 
     /**
@@ -261,21 +270,21 @@
     function isNullFormat(o) {
         if (o) {
             return o;
-        }else{
+        } else {
             return '暂无';
         }
     }
 
 </script>
 <script type="text/html" id="barTeacher">
-    <a title="查看"  onclick="xadmin.open('查看稿件','/essay/checkEssay?essayId={{d.id}}',800,600);" href="javascript:;">
+    <a title="查看" onclick="xadmin.open('查看稿件','/essay/checkEssay?essayId={{d.id}}',800,600);" href="javascript:;">
         <i class="layui-icon iconfont">&#xe6ac;</i>
     </a>
     <#--<a title="下载"  onclick="down({{d.id}});" href="javascript:;">-->
-        <#--<i class="layui-icon iconfont">&#xe714;</i>-->
+    <#--<i class="layui-icon iconfont">&#xe714;</i>-->
     <#--</a>-->
     <#--<a title="移除" onclick="member_del(this,{{d.id}})" href="javascript:;">-->
-        <#--<i class="layui-icon">&#xe640;</i>-->
+    <#--<i class="layui-icon">&#xe640;</i>-->
     <#--</a>-->
     <a title="通过" onclick="pass({{d.id}})" href="javascript:;">
         <i class="layui-icon iconfont">&#xe6ad;</i>

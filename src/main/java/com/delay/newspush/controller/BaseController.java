@@ -11,14 +11,14 @@ public class BaseController {
     @Autowired
     protected HttpServletRequest request;
 
-    public HttpSession getSession(){
+    public HttpSession getSession() {
         return request.getSession();
     }
 
-    public User getUser(){
+    public User getUser() {
         User user = null;
         try {
-            user = (User)request.getSession().getAttribute("user");
+            user = (User) request.getSession().getAttribute("user");
         } catch (Exception e) {
             e.printStackTrace();
             return null;

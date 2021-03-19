@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
     <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css" />
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css"/>
     <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
@@ -24,13 +24,13 @@
 <div class="layui-fluid">
     <div class="layui-row">
         <#--<form class="layui-form" action="">-->
-            <div class="wrapper">
-                <label for="title" style="text-align: center;font-size: 27px;">${essay.title}</label>
-                <label for="title">新闻类型:</label>
-                <div style="padding: 10px 0;">${essay.type.name}</div>
-                <label for="content">正文:</label>
-                <div style="padding: 10px 0;">${essay.content}</div>
-            </div>
+        <div class="wrapper">
+            <label for="title" style="text-align: center;font-size: 27px;">${essay.title}</label>
+            <label for="title">新闻类型:</label>
+            <div style="padding: 10px 0;">${essay.type.name}</div>
+            <label for="content">正文:</label>
+            <div style="padding: 10px 0;">${essay.content}</div>
+        </div>
         <#--</form>-->
     </div>
 </div>

@@ -10,6 +10,6 @@ import java.util.List;
  * @Author 闫金柱
  * @create 2021-3-15 10:42
  */
-public interface CommentService extends JpaRepository<Comment,Integer> {
+public interface CommentService extends JpaRepository<Comment, Integer> {
     List<Comment> findByEssayId(Integer essayId);
 }
