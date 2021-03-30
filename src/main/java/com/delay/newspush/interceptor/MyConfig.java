@@ -60,7 +60,8 @@ public class MyConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/page/home")
                 .excludePathPatterns("/page/clientPerson")
                 .excludePathPatterns("/page/clientLogin")
-                .excludePathPatterns("/page/myFav");
+                .excludePathPatterns("/page/myFav")
+                .excludePathPatterns("/websocket/oneToMany");
 
         addInterceptor2.addPathPatterns(
                 "/page/home",
@@ -74,7 +75,8 @@ public class MyConfig implements WebMvcConfigurer {
                 "/user/add",
                 "/type/**",
                 "/essay/**",
-                "/page/clientLogin"
+                "/page/clientLogin",
+                "/websocket/oneToMany"
         );
 
     }
